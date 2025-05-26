@@ -1,0 +1,33 @@
+package com.example;
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ChromeWikipedia {
+    public static void main(String[] args) throws InterruptedException {
+        System.setProperty("webdriver.chrome.driver", "C:\\Software\\chromedriver-win64\\chromedriver.exe");
+
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+
+        driver.get("https://www.wikipedia.org/");
+        driver.findElement(By.name("search")).sendKeys("Artificial Intelligence");
+        driver.findElement(By.cssSelector("button.pure-button")).click();
+
+        // Click "History" section link (wait might be needed)
+        Thread.sleep(2000); // Use WebDriverWait in real use
+
+        WebElement historyLink = driver.findElement(By.linkText("History"));
+        historyLink.click();
+
+        Thread.sleep(2000); // Wait for navigation
+        System.out.println("Section Title: " + driver.getTitle());
+
+        driver.quit();
+    }
+}
+
+
